@@ -127,6 +127,9 @@ $(document).ready(function() {
         var loadLocal = prompt("Insert string here","");
         if (loadLocal) {
             localStorage.expdb_shows = loadLocal;
+            target.allShows = JSON.parse(localStorage.expdb_shows);
+            $(".expdb .tl-children").empty();
+            addShows();
         }
     });
     
