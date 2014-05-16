@@ -4,7 +4,6 @@
 // @version    0.1
 // @description  expands the predb.me website appending a "new term" placeholder that allows for Shows to be saved localy incrementing the episode number automatically
 // @match      http://predb.me/*
-// @require    https://raw.githubusercontent.com/moagrius/copycss/master/jquery.copycss.js
 // @require    https://datejs.googlecode.com/files/date.js
 // @copyright  Creative Commons Attribution 4.0 International License.
 // ==/UserScript==
@@ -26,20 +25,11 @@ $(document).ready(function() {
 	$("body").append(newEle.hoverMenu);
 	target.menu.prepend(newEle.expdb);
 	if (localStorage.expdb_shows) target.allShows = JSON.parse(localStorage.expdb_shows);
-
-	$('.expdb-menu').css({
-		"background": "url(\"//predb.me/front/img/sprites.png\") no-repeat scroll 0 -483px #F5F5F5",
-		"border-color": "#FEFEFE #FAFAFA",
-		"border-image": "none",
-		"border-style": "solid",
-		"border-width": "1px",
-		"box-shadow": "1px 0 4px 0 rgba(0, 0, 0, 0.2)",
-		"border-left": "0 none",
-		"border-radius": "0 4px 4px 0",
-		"display": "none",
-		"margin-left": "1px",
-		"position": "absolute"
-	});
+    
+	$('.expdb-menu').css({"background-color":"#F5F5F5","border-color": "#FEFEFE #FAFAFA","border-image": "none","border-style": "solid","border-width": "1px","box-shadow": "1px 0 4px 0 rgba(0, 0, 0, 0.2)","border-left": "0 none","border-radius": "0 4px 4px 0","display": "none","margin-left": "1px","position": "absolute"});
+	$('.expdb-add').css({"background":"url('http://i.imgur.com/MfIDJpm.png') no-repeat","width":"32px","height":"32px","display":"block","float":"left","margin-left":"12px"});
+	$('.expdb-load').css({"background":"url('http://i.imgur.com/sRM4IZH.png') no-repeat","width":"32px","height":"32px","display":"block","float":"left","margin-left":"13px"});
+	$('.expdb-out').css({"background":"url('http://i.imgur.com/IF9Lyqf.png') no-repeat","width":"32px","height":"32px","display":"block","margin-left":"100px"});
 
 	var addShows = function() {
 		if (target.allShows) {
@@ -59,21 +49,13 @@ $(document).ready(function() {
 				$("<li class='tl-li tl-child' localIndex='"+i+"'><a href='?search="+searchString+"' class='expdb-show tl-expdb-term' >"+showName+"</a></li>").appendTo($(".expdb .tl-children"));
 			});
 		}
-        $('.expdb-add').css({"background":"url('http://i.imgur.com/MfIDJpm.png') no-repeat","width":"32px","height":"32px","display":"block","float":"left","margin-left":"12px"});
-        $('.expdb-load').css({"background":"url('http://i.imgur.com/sRM4IZH.png') no-repeat","width":"32px","height":"32px","display":"block","float":"left","margin-left":"13px"});
-        $('.expdb-out').css({"background":"url('http://i.imgur.com/IF9Lyqf.png') no-repeat","width":"32px","height":"32px","display":"block","margin-left":"100px"});
-        //http://i.imgur.com/6RgaVhw.png
 
-		$('.tl-expdb-term').copyCSS('.tl-child .tl-term');
-		$('.tl-expdb-term').css({
-			"overflow": "hidden",
-			"text-overflow": "ellipsis",
-			"-o-text-overflow": "ellipsis",
-			"white-space": "nowrap",
-			"width": "100%"
-		});
+        $('.tl-expdb-term').css({"display": "list-item","padding": "3px 15px 5px 25px","padding-left": "40px","color": "#717171","background": "url('front/img/sprites.png') no-repeat","background-position": "22px -249px"});
+        GM_addStyle(".tl-expdb-term:hover{background-color:#fdfdfd!important;}");
+	GM_addStyle(".tl-expdb-term{-moz-transition: background-color .1s ease-out .01s;-webkit-transition: background-color .1s ease-out .01s;transition: background-color .1s ease-out .01s;}");
+        $('.tl-expdb-term').css({"overflow": "hidden","text-overflow": "ellipsis","-o-text-overflow": "ellipsis","white-space": "nowrap","width": "100%"});
 	};
-	//#FDFDFD
+
 	$(document).on('mouseenter','expdb-add',function() {
 		$(this).parent().css("background-color","#FDFDFD");
 	});
@@ -103,16 +85,15 @@ $(document).ready(function() {
 	$('.expdb-add').on('click', function() {
 		var stringName = prompt("Enter show name","Your Fav Show");
 		if (stringName) {
-			showSeason = prompt("Enter current season","01, 02, 03, etc.."),
+			var showSeason = prompt("Enter current season","01, 02, 03, etc.."),
 				showEpisode = prompt("Enter current episode","01, 02, 03, etc.."),
 				dayToIncrement = prompt("Enter day to increment episode number","Monday, Tuesday, etc.."),
 				lastIncremented = target.date.getDate();
+            target.allShows.push([stringName,showSeason,showEpisode,dayToIncrement,lastIncremented]);
+            localStorage.expdb_shows = JSON.stringify(target.allShows);
+            $(".expdb .tl-children").empty();
+            addShows();
 		}
-
-		target.allShows.push([stringName,showSeason,showEpisode,dayToIncrement,lastIncremented]);
-		localStorage.expdb_shows = JSON.stringify(target.allShows);
-		$(".expdb .tl-children").empty();
-		addShows();
 	});
 
 	$('.expdb-remove').on('click',function() {
