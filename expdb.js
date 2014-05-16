@@ -51,8 +51,7 @@ $(document).ready(function() {
 		}
 
         $('.tl-expdb-term').css({"display": "list-item","padding": "3px 15px 5px 25px","padding-left": "40px","color": "#717171","background": "url('front/img/sprites.png') no-repeat","background-position": "22px -249px"});
-        GM_addStyle(".tl-expdb-term:hover{background-color:#fdfdfd!important;}");
-	GM_addStyle(".tl-expdb-term{-moz-transition: background-color .1s ease-out .01s;-webkit-transition: background-color .1s ease-out .01s;transition: background-color .1s ease-out .01s;}");
+
         $('.tl-expdb-term').css({"overflow": "hidden","text-overflow": "ellipsis","-o-text-overflow": "ellipsis","white-space": "nowrap","width": "100%"});
 	};
 
