@@ -93,7 +93,7 @@ $(document) .ready(function () {
                     console.log(target.allShows[i]);
                     localStorage.expdb_shows = JSON.stringify(target.allShows);
                 }
-                $('<li class="tl-li tl-child" localIndex="' + i + '"><a href="?search="' + searchString + '" class="expdb-show tl-expdb-term" >' + showName + '</a></li>') .appendTo($('.expdb .tl-children'));
+                $('<li class="tl-li tl-child" localIndex="' + i + '"><a href="?search=' + searchString + '" class="expdb-show tl-expdb-term" >' + showName + '</a></li>') .appendTo($('.expdb .tl-children'));
             });
         }
         $('.tl-expdb-term') .css({
