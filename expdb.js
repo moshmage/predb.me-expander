@@ -16,9 +16,9 @@ $(document) .ready(function () {
         date: new Date()
     },
     newEle = {
-        expdb: $('<li class='expdb tl-adult'></li>'),
-        menu: $('<a href=# class='expdb-add' alt='New search term'></a><a href=# class='expdb-load' alt='Load local storage'></a><a href=# class='expdb-out' alt='Eject local storage'></a><ul class='tl-children'></ul>'),
-        hoverMenu: $('<ul class='expdb-menu'><li><span class='expdb-sel-day'>day</span></li><li><span class='expdb-popmenu' style='cursor:pointer;color:#7F7F7F;'>Properties</span></li></ul>'),
+        expdb: $('<li class="expdb tl-adult"></li>'),
+        menu: $('<a href=# class="expdb-add" alt="New search term"></a><a href=# class="expdb-load" alt="Load local storage"></a><a href=# class="expdb-out" alt="Eject local storage"></a><ul class="tl-children"></ul>'),
+        hoverMenu: $('<ul class="expdb-menu"><li><span class="expdb-sel-day">day</span></li><li><span class="expdb-popmenu" style="cursor:pointer;color:#7F7F7F;">Properties</span></li></ul>'),
         propMenu: $('<div class="popup-block options ui-draggable expdb-pop" style="display: none;"><div class="close-button">x</div><div class="drag-handle block-head tabbed"><h3 class="epxdb-show-name"></h3><ul class="popup-tabs inline-list"><li><a class="tab active" data="search" href="">EXpanded Options</a></li></ul></div><div class="block-body"><div class="tab-content tab-content-search active"><div class="section-wrap"><div class="section-h"><span class="expdb-show-name"></span><small class="question-mark" title="Edit the show properties below">[?]</small></div><div class="add-search-form"><div><span class="label">Show</span><div style="width: 100%;"><input type="text" class="expdb-show-name-edit" name="title" placeholder="Fantastical Journey of Madam Lillybird.."></input></div></div><div style="position: relative;float: left;width: 33%;"><span class="label">Season</span><div style=""><input type="text" class="expdb-season-edit" name="title" placeholder="01, 02, etc.."></div></div><div style="position: relative;float: left;width: 33%;"><span class="label">Episode</span><div style=""><input type="text" class="expdb-episode-edit" name="title" placeholder="01, 02, etc.."></div></div><div style="position: relative;float: left;width: 33%;"><span class="label">Dau to Increment</span><div style=""><input type="text" placeholder="Monday, Tuesday, etc.." name="title" class="expdb-dti"></div></div></div></div><a class="button right expdb-save" href="">Save</a><a class="button right expdb-remove" href="" localindex="0">Remove</a></div></div></div>')
     };
     newEle.expdb.append(newEle.menu);
@@ -27,11 +27,11 @@ $(document) .ready(function () {
     target.menu.prepend(newEle.expdb);
     if (localStorage.expdb_shows) target.allShows = JSON.parse(localStorage.expdb_shows);
     $('.bs .expdb-menu') .css({
-        'background': 'url('front/img/sprites.png') no-repeat scroll 0 -483px #F5F5F5',
+        'background': 'url("front/img/sprites.png") no-repeat scroll 0 -483px #F5F5F5',
         'border-color': '#FEFEFE #FAFAFA'
     });
     $('.ds .expdb-menu') .css({
-        'background': 'url('front/img/sprites.png') no-repeat scroll 0 -390px #262626',
+        'background': 'url("front/img/sprites.png") no-repeat scroll 0 -390px #262626',
         'border': '1px solid #2E2E2E'
     });
     $('.expdb-menu') .css({
@@ -46,7 +46,7 @@ $(document) .ready(function () {
         'position': 'absolute'
     });
     $('.expdb-add') .css({
-        'background': 'url('http://i.imgur.com/MfIDJpm.png') no-repeat',
+        'background': 'url("http://i.imgur.com/MfIDJpm.png") no-repeat',
         'width': '32px',
         'height': '32px',
         'display': 'block',
@@ -54,7 +54,7 @@ $(document) .ready(function () {
         'margin-left': '12px'
     });
     $('.expdb-load') .css({
-        'background': 'url('http://i.imgur.com/sRM4IZH.png') no-repeat',
+        'background': 'url("http://i.imgur.com/sRM4IZH.png") no-repeat',
         'width': '32px',
         'height': '32px',
         'display': 'block',
@@ -62,7 +62,7 @@ $(document) .ready(function () {
         'margin-left': '13px'
     });
     $('.expdb-out') .css({
-        'background': 'url('http://i.imgur.com/IF9Lyqf.png') no-repeat',
+        'background': 'url("http://i.imgur.com/IF9Lyqf.png") no-repeat',
         'width': '32px',
         'height': '32px',
         'display': 'block',
@@ -93,7 +93,7 @@ $(document) .ready(function () {
                     console.log(target.allShows[i]);
                     localStorage.expdb_shows = JSON.stringify(target.allShows);
                 }
-                $('<li class='tl-li tl-child' localIndex='' + i + ''><a href='?search=' + searchString + '' class='expdb-show tl-expdb-term' >' + showName + '</a></li>') .appendTo($('.expdb .tl-children'));
+                $('<li class="tl-li tl-child" localIndex="' + i + '"><a href="?search="' + searchString + '" class="expdb-show tl-expdb-term" >' + showName + '</a></li>') .appendTo($('.expdb .tl-children'));
             });
         }
         $('.tl-expdb-term') .css({
@@ -101,7 +101,7 @@ $(document) .ready(function () {
             'padding': '3px 15px 5px 25px',
             'padding-left': '40px',
             'color': '#717171',
-            'background': 'url('front/img/sprites.png') no-repeat',
+            'background': 'url("front/img/sprites.png") no-repeat',
             'background-position': '22px -249px'
         });
         $('.tl-expdb-term') .css({
@@ -130,7 +130,7 @@ $(document) .ready(function () {
             thisTarget.find('.expdb-season-edit') .val(eleInfo.season);
             thisTarget.find('.expdb-dti') .val(eleInfo.day);
         }
-    }
+    };
     $(document) .on('mouseenter', 'expdb-add', function () {
         $(this) .parent() .css('background-color', '#FDFDFD');
     });
@@ -207,10 +207,10 @@ $(document) .ready(function () {
         });
     });
     $('.expdb-popmenu') .on('click', function () {
-        me = $(this),
-        thisTarget = $('.expdb-pop'),
-        eleIndex = me.attr('localIndex'),
-        thisTarget.find('.expdb-remove') .attr('localIndex', eleIndex);
+        var me = $(this),
+        	thisTarget = $('.expdb-pop'),
+        	eleIndex = me.attr('localIndex');
+        thisTarget.find('.expdb-remove').attr('localIndex', eleIndex);
         thisTarget.css({
             'display': 'block'
         });
